@@ -4,10 +4,10 @@ import io
 
 def split_excel_file(input_file, chunk_size):
     # Read the Excel file into a pandas DataFrame
-    df = pd.read_excel(input_file)
+    df = pd.read_excel(input_file, keep_default_na=False, na_values='')
 
     # Get the total number of rows in the DataFrame
-    total_rows = len(df)
+    total_rows = df.shape[0]
 
     # Calculate the number of chunks required
     num_chunks = total_rows // chunk_size + (total_rows % chunk_size > 0)
@@ -26,6 +26,7 @@ def split_excel_file(input_file, chunk_size):
 
 # Streamlit app
 st.title("👋 Excel File Splitter")
+st.write("Version 2.0")
 
 # Chunk size input
 chunk_size = st.number_input("Enter the chunk size", min_value=1, step=1)
